@@ -31,6 +31,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required',
+        ]);
+
+        if ($validatedData->fails()) {
+            return \redirect()->back()->with('message', $validatedData->getMessageBag()->getMessages());
+        }
+
         $path = $request->file('image')->store('public/images');
         $url = Storage::url($path);
 

@@ -9,13 +9,19 @@
                 @csrf
                 <div class="mb-3">
                     <label for="catName" class="form-label">Category Name</label>
-                    <input type="text" name="name" class="form-control" id="catName" aria-describedby="emailHelp"
-                        required>
+                    <input type="text" name="name" class="form-control" id="catName">
+                    @error('name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label">Description*</label>
                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Leave a comment here"></textarea>
+                    @error('description')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
+
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" name="image" id="image">
