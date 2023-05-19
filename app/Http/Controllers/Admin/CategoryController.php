@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -30,7 +31,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = $request->file('image')->store('public/images');
+        $url = Storage::url($path);
+
+        $category =  Category::create([
+            "name" => $request->name,
+            "description" => $request->description ?? null,
+            "image" => $url ?? null
+        ]);
+
+        return redirect('/categories');
     }
 
     /**
