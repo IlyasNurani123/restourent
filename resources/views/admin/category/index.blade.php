@@ -12,6 +12,7 @@
                         <th scope="col">Category Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,9 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->description }}</td>
                             <td><img src="{{ $item->image ?? null }}" width="50" height="50" /></td>
+                            <td>
+                                <a href={{ route('categories.edit', $item->id) }}>edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
